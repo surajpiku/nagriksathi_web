@@ -1,0 +1,11 @@
+{
+    "name": "CscToolkit",
+    "alias": "csctoolkit",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\CscToolkit\\Providers\\CscToolkitServiceProvider"
+    ],
+    "files": []
+}

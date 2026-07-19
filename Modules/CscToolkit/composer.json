@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/csctoolkit",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\CscToolkit\\": "app/",
+            "Modules\\CscToolkit\\Database\\Factories\\": "database/factories/",
+            "Modules\\CscToolkit\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\CscToolkit\\Tests\\": "tests/"
+        }
+    }
+}
