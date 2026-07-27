@@ -46,6 +46,14 @@ class EmailOtpService
             });
         } catch (\Exception $e) {
             \Log::error('Email OTP send failed: ' . $e->getMessage());
+
+            // The OTP row above is still valid, but the user never received it —
+            // don't tell them it sent, and let dev_otp through so testing isn't blocked.
+            return [
+                'success' => false,
+                'message' => 'Could not send the OTP email right now. Please try again or use phone login.',
+                'dev_otp' => app()->isLocal() ? $otp : null,
+            ];
         }
 
         return [
