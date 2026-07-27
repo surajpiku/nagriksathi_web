@@ -204,6 +204,20 @@ class OpportunityController extends Controller
         ]);
     }
 
+    public function saved(Request $request)
+    {
+        $saved = $request->user()
+            ->savedOpportunities()
+            ->with('category')
+            ->where('is_active', true)
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data'    => $saved,
+        ]);
+    }
+
     public function save(Request $request, Opportunity $opportunity)
     {
         $request->user()->savedOpportunities()->syncWithoutDetaching([$opportunity->id]);

@@ -77,6 +77,15 @@ Route::prefix('v1')->group(function () {
         Route::get('/providers/{id}/reviews', [HunarController::class, 'reviews']);
     });
 
+    // Opportunities — public read (listing, detail, categories, deadlines)
+    Route::prefix('opportunities')->group(function () {
+        Route::get('/',            [OpportunityController::class, 'index']);
+        Route::get('/categories',  [OpportunityController::class, 'categories']);
+        Route::get('/deadlines',   [OpportunityController::class, 'deadlines']);
+        // Constraint ensures /saved and /matched in auth group take priority over this wildcard
+        Route::get('/{opportunity}', [OpportunityController::class, 'show'])->where('opportunity', '[0-9]+');
+    });
+
 });
 
 // ---------- AUTHENTICATED ROUTES ----------
@@ -131,13 +140,10 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     // Life Events
     Route::post('/life-events/{type}', [LifeEventController::class, 'trigger']);
 
-    // Opportunities
+    // Opportunities — auth-only write + matched + saved list
     Route::prefix('opportunities')->group(function () {
-        Route::get('/',                       [OpportunityController::class, 'index']);
         Route::get('/matched',                [OpportunityController::class, 'matched']);
-        Route::get('/categories',             [OpportunityController::class, 'categories']);
-        Route::get('/deadlines',              [OpportunityController::class, 'deadlines']);
-        Route::get('/{opportunity}',          [OpportunityController::class, 'show']);
+        Route::get('/saved',                  [OpportunityController::class, 'saved']);
         Route::post('/{opportunity}/save',    [OpportunityController::class, 'save']);
         Route::post('/{opportunity}/applied', [OpportunityController::class, 'markApplied']);
     });
