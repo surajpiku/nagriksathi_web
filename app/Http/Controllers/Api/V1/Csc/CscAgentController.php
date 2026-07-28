@@ -143,13 +143,13 @@ class CscAgentController
     // Agent profile
     public function profile(Request $request)
     {
-        $agent = $request->user()->SevaMitra;
+        $agent = $request->user()->sevaMitra;
         return response()->json(['success' => true, 'data' => $agent]);
     }
 
     public function updateProfile(Request $request)
     {
-        $agent = $request->user()->SevaMitra;
+        $agent = $request->user()->sevaMitra;
         $agent->update($request->only([
             'centre_name', 'address', 'upi_id',
             'services_json', 'languages_json', 'working_hours_json',

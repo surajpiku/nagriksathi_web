@@ -82,9 +82,9 @@ public function guardName(): string
 {
     return 'sanctum';
 }
-public function SevaMitra()
+public function sevaMitra()
 {
-    return $this->hasOne(SevaMitra::class);
+    return $this->hasOne(CscAgent::class);
 }
 
 public function cscAgent()
